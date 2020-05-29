@@ -10,7 +10,7 @@ import Info from "./info/Info";
 import Marker from "./marker/Marker";
 import Legend from "./legend/Legend";
 import ZoomButtons from "./zoombuttons/ZoomButtons";
-
+import { flatMarkersList } from "../markers";
 
 const MAP_MAX_WIDTH = window.innerWidth;
 const MAP_MAX_HEIGHT = window.innerHeight;
@@ -50,7 +50,7 @@ class PolyMap extends React.Component {
     state = {
         legend: this.props.defaultLegend,
         markers: this.props.defaultMarkers,
-        flatMarkers: this.props.flatMarkers,
+        flatMarkers: flatMarkersList(this.props.defaultMarkers),
         regions: this.props.defaultRegions,
         selectedRegion: null,
         position: {

@@ -730,4 +730,20 @@ const Markers = {
     ]
 };
 
+
+export function flatMarkersList(markersList, regionIdKeyName = "regionId") {
+    const flatMarkers = [];
+
+    for (const regionId of Object.keys(markersList)) {
+        const rMarkers = markersList[regionId];
+
+        for (const marker of rMarkers) {
+            flatMarkers.push({ ...marker, [regionIdKeyName]: parseInt(regionId) })
+        }
+    } 
+
+    return flatMarkers;
+}
+
+
 export default Markers;

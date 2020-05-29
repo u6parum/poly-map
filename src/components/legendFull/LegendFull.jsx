@@ -7,20 +7,22 @@ import Masonry from '../hoc/masonry/Masonry';
 import { MarkerTypes } from '../../markers';
 import Content from '../Content/Content';
 import Title from '../Title/Title';
+import { flatMarkersList } from "../../markers";
 
 
 const { Panel } = Collapse;
 
 
-const LegendFull = ({ regions, flatMarkers }) => {
+const LegendFull = ({ defaultRegions, defaultMarkers }) => {
 
     const unique = (values) => values.filter((v, i) => values.indexOf(v) === i);
 
+    const flatMarkers = flatMarkersList(defaultMarkers);
     const runningMarkers = flatMarkers.filter(m => m.type === MarkerTypes.running);
     const projectMarkers = flatMarkers.filter(m => m.type === MarkerTypes.project);
 
     const running = unique(runningMarkers
-        .map(m => regions.find(reg => reg.id === m.regionId)))
+        .map(m => defaultRegions.find(reg => reg.id === m.regionId)))
         .map(r => (
             <div>
                 <h2 className={styles.RegionHeader}>{r.name}</h2>
@@ -36,7 +38,7 @@ const LegendFull = ({ regions, flatMarkers }) => {
         ));
 
     const project = unique(projectMarkers
-        .map(m => regions.find(reg => reg.id === m.regionId)))
+        .map(m => defaultRegions.find(reg => reg.id === m.regionId)))
         .map(r => (
             <div>
                 <h2 className={styles.RegionHeader}>{r.name}</h2>

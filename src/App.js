@@ -17,21 +17,9 @@ import './App.scss';
 import PolyMap from './components/Map';
 import LegendFull from "./components/legendFull/LegendFull";
 
-
 import defaultMarkers from './markers';
 import defaultLegend from './legend';
 import defaultRegions from './regions';
-
-
-const flatMarkers = [];
-
-for (const regionId of Object.keys(defaultMarkers)) {
-	const rMarkers = defaultMarkers[regionId];
-
-	for (const marker of rMarkers) {
-		flatMarkers.push({ ...marker, regionId: parseInt(regionId) })
-	}
-} 
 
 
 const App = () => (
@@ -56,11 +44,10 @@ const App = () => (
 			defaultLegend={defaultLegend} 
 			defaultMarkers={defaultMarkers}
 			defaultRegions={defaultRegions}
-			flatMarkers={flatMarkers}
 		/>
 		<LegendFull
-			regions={defaultRegions}
-			flatMarkers={flatMarkers}
+			defaultRegions={defaultRegions}
+			defaultMarkers={defaultMarkers}
 		/>
 	</div>
 );
