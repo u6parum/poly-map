@@ -1,0 +1,51 @@
+.Info {
+    position: absolute;
+    top: 50px;
+    right: 15px;
+    width: 340px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+    h1 {
+        margin: 0;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 24px;
+        line-height: 24px;
+        /* or 100% */
+
+        text-transform: uppercase;
+
+        color: #D25F0C;
+    }
+
+    h3 {
+        font-style: normal;
+        font-weight: bold;
+        font-size: 13px;
+        line-height: 20px;
+        /* identical to box height, or 154% */
+
+        display: flex;
+        align-items: center;
+        letter-spacing: 0.25px;
+        text-transform: uppercase;
+
+        color: #141414;
+    }
+
+    .ColHeader {
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 1px solid #E0E0E0;
+        padding-bottom: 20px;
+    }
+
+    .Col {
+        border-bottom: 1px solid #E0E0E0;
+        padding: 10px 0;
+
+        &:last-child {
+            border: none;
+        }
+    }
+}
