@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import "~bootstrap-4-grid/scss/grid.scss";
 @import "./GlobalVariables.scss";
 
 
@@ -7,54 +8,48 @@ html {
   --antd-wave-shadow-color: $primary-color !important;
 }
 
-
 body {
   margin: 0;
   padding: 0;
 }
 
-
-h1 {
-  font-style: normal;
-  font-weight: bold;
-  font-size: 45px;
-  line-height: 55px;
-  color: $primary-color2;
-}
-
-
-p {
-  font-style: normal;
-  font-weight: 500;
-  font-size: 24px;
-  line-height: 30px;
-  color: #141414;
-}
-
-
 .App {
   font-family: 'Inter', sans-serif;
-  margin-top: 40px;
-}
 
-
-.ant-btn {
-    &:hover, &:focus, &:visited {
-      border: 1px solid $primary-color !important;
+  h1 {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 45px;
+    line-height: 55px;
+    color: $primary-color2;
   }
-}
+
+  p {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 30px;
+    color: #141414;
+  }
 
 
-.ant-switch {
-  background-color: $primary-color !important;
-}
+  .ant-btn {
+    &:hover,
+    &:focus,
+    &:visited {
+      border: 1px solid $primary-color !important;
+    }
+  }
 
+  .ant-switch {
+    background-color: $primary-color !important;
+  }
 
-.ant-switch:focus {
-  box-shadow: 0 0 0 2px $secondary-color !important;
-}
+  .ant-switch:focus {
+    box-shadow: 0 0 0 2px $secondary-color !important;
+  }
 
-
-.ant-switch-checked {
-  background-color: $primary-color2 !important;
+  .ant-switch-checked {
+    background-color: $primary-color2 !important;
+  }
 }

@@ -5,7 +5,7 @@ import { config } from "react-spring";
 import { Spring } from 'react-spring/renderprops';
 
 import SVGDropShadow from "./hoc/svgDropShadow/SVGDropShadow";
-import MapContainer from "./hoc/MapContainer";
+import MapContainer from "./hoc/mapContainer/MapContainer";
 import Info from "./info/Info";
 import Marker from "./marker/Marker";
 import Legend from "./legend/Legend";
@@ -15,6 +15,7 @@ import { flatMarkersList } from "../markers";
 const MAP_MAX_WIDTH = window.innerWidth;
 const MAP_MAX_HEIGHT = window.innerHeight;
 const MAP_CENTER_COORDS = [58, 33];
+const MAP_SCALE = 600;
 
 
 const geoUrl = process.env.PUBLIC_URL + "map.json";
@@ -173,7 +174,7 @@ class PolyMap extends React.Component {
                         regionId={marker.regionId}
                         x={marker.x}
                         y={marker.y}
-                        radius={4}
+                        radius={this.state.markersRadius}
                         type={marker.type}
                         solidColor={marker.solidColor}
                         title={marker.title}
@@ -206,8 +207,7 @@ class PolyMap extends React.Component {
     }
 
     projection() {
-        return geoMercator()
-            .scale(600)
+        return geoMercator().scale(MAP_SCALE);
     }
 
     render() {

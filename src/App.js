@@ -1,4 +1,4 @@
-import React from "react"
+import React from "react";
 
 import 'antd/es/card/style/css';
 import 'antd/es/row/style/css';
@@ -10,7 +10,6 @@ import "antd/es/radio/style/css";
 import "antd/es/checkbox/style/css";
 import "antd/es/collapse/style/css";
 import "antd/es/switch/style/css";
-import { Row, Col } from "antd";
 
 import './App.scss';
 
@@ -24,9 +23,9 @@ import defaultRegions from './regions';
 
 const App = () => (
 	<div className={"App"}>
-		<div style={{maxWidth: 1420, margin: "auto"}}>
-			<Row>
-				<Col sm={24} xl={13}>
+		<div className="container">
+			<div className="row">
+				<div className="col-sm-12 col-xl-8">
 					<h1>Наша география 2.0</h1>
 					<p>
 						Четыре года назад редакция «Северной широты» впервые собрала на одной карте всё (ну или почти всё), чем богат «Полиметалл» — фабрики, рудники, карьеры, геологоразведочные проекты и месторождения. 
@@ -37,18 +36,24 @@ const App = () => (
 					<p>
 						<small>А еще на нашей карте появились значки проектов развития. Это точки роста компании — те объекты, которые «Полиметалл» планирует развивать в ближайшем будущем.</small>
 					</p>
-				</Col>
-			</Row>
+				</div>
+			</div>
 		</div>
 		<PolyMap 
 			defaultLegend={defaultLegend} 
 			defaultMarkers={defaultMarkers}
 			defaultRegions={defaultRegions}
 		/>
-		<LegendFull
-			defaultRegions={defaultRegions}
-			defaultMarkers={defaultMarkers}
-		/>
+		<div className="container-fluid">
+			<div className="row">
+				<div className="col-12">
+					<LegendFull
+						defaultRegions={defaultRegions}
+						defaultMarkers={defaultMarkers}
+					/>
+				</div>
+			</div>
+		</div>
 	</div>
 );
 

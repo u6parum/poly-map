@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Popover } from 'antd';
 import { Marker } from 'react-simple-maps';
 import Icon from "../helpers/icon/Icon";
@@ -8,15 +8,15 @@ import Title from '../Title/Title';
 
 const MapMarker = ({ x, y, type, title, solar, regionId, onClick, radius = 10, items = [], visible = false }) => {
 
-    const [isHovered, setHovered] = useState(false);
+    //const [isHovered, setHovered] = useState(false);
 
     const marker = (
         <Marker
             display={visible ? '' : 'none'}
             coordinates={[x, y]} 
             cursor="pointer" 
-            onMouseEnter={() => setHovered(true)} 
-            onMouseLeave={() => setHovered(false)}
+            //onMouseEnter={() => setHovered(true)} 
+            //onMouseLeave={() => setHovered(false)}
             onClick={(e) => onClick([x, y], regionId)}
         >
             {
