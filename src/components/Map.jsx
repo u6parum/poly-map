@@ -11,6 +11,7 @@ import Marker from "./marker/Marker";
 import Legend from "./legend/Legend";
 import ZoomButtons from "./zoombuttons/ZoomButtons";
 import { flatMarkersList } from "../markers";
+import geographies from "../assets/geodata/map.json";
 
 const MAP_MAX_WIDTH = window.innerWidth;
 const MAP_MAX_HEIGHT = window.innerHeight;
@@ -18,7 +19,6 @@ const MAP_CENTER_COORDS = [58, 33];
 const MAP_SCALE = 600;
 
 
-const geoUrl = process.env.PUBLIC_URL + "map.json";
 
 const selectedColor = '#D3C9A8',
     highlightColor = 'rgba(211, 201, 168, 0.5)',
@@ -243,7 +243,7 @@ class PolyMap extends React.Component {
                                 onMoveEnd={this.handleMoveEnd}
                             >
                                 <SVGDropShadow>
-                                    <Geographies geography={geoUrl} disableOptimization>
+                                    <Geographies geography={geographies}>
                                         {({ geographies, projection }) =>
                                             geographies.map(geo => this.getGeography(geo, projection))
                                         }

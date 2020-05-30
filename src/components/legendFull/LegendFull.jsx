@@ -24,11 +24,13 @@ const LegendFull = ({ defaultRegions, defaultMarkers }) => {
     const running = unique(runningMarkers
         .map(m => defaultRegions.find(reg => reg.id === m.regionId)))
         .map(r => (
-            <div>
+            <div key={r.id}>
                 <h2 className={styles.RegionHeader}>{r.name}</h2>
                 {
-                    runningMarkers.filter(rm => rm.regionId === r.id).map(rm => (
-                        <div style={{ marginTop: 16 }}>
+                    runningMarkers
+                    .filter(rm => rm.regionId === r.id)
+                    .map(rm => (
+                        <div key={`${rm.title}_${rm.x}_${rm.y}`} style={{ marginTop: 16 }}>
                             <Title text={rm.title} solar={rm.solar} />
                             <Content items={rm.items} maxWidth={400} />
                         </div>
@@ -40,11 +42,13 @@ const LegendFull = ({ defaultRegions, defaultMarkers }) => {
     const project = unique(projectMarkers
         .map(m => defaultRegions.find(reg => reg.id === m.regionId)))
         .map(r => (
-            <div>
+            <div key={r.id}>
                 <h2 className={styles.RegionHeader}>{r.name}</h2>
                 {
-                    projectMarkers.filter(rm => rm.regionId === r.id).map(rm => (
-                        <div style={{ marginTop: 16 }}>
+                    projectMarkers
+                    .filter(rm => rm.regionId === r.id)
+                    .map(rm => (
+                        <div key={`${rm.title}_${rm.x}_${rm.y}`} style={{ marginTop: 16 }}>
                             <Title text={rm.title} solar={rm.solar} />
                             <Content items={rm.items} maxWidth={400} />
                         </div>
@@ -57,7 +61,7 @@ const LegendFull = ({ defaultRegions, defaultMarkers }) => {
     const geosearch = flatMarkers
         .filter(m => m.type === MarkerTypes.geosearch)
         .map(rm => (
-            <Col sm={24} md={12} lg={6}>
+            <Col key={`${rm.title}_${rm.x}_${rm.y}`} sm={24} md={12} lg={6}>
                 <p className={styles.GeoSearchP}>{rm.title}</p>
             </Col>
         ));
