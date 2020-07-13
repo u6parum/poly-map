@@ -2,6 +2,7 @@ import React from 'react';
 import { Row, Col } from 'antd';
 import Icon from "../helpers/icon/Icon";
 import { MarkerTypes } from "../../markers";
+import styles from "./Content.module.scss";
 
 const Content = ({ items, maxWidth }) => {
     return (
@@ -12,7 +13,7 @@ const Content = ({ items, maxWidth }) => {
                     case MarkerTypes.h:
                         return (
                             <Col key={'col-' + item.text} span={24}>
-                                <h4 style={{margin: 0}}>{item.text}</h4>
+                                <h4 className={styles.H4} style={{margin: 0}}>{item.text}</h4>
                             </Col>
                         );
                     default:

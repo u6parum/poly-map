@@ -10,7 +10,7 @@ import Info from "./info/Info";
 import Marker from "./marker/Marker";
 import Legend from "./legend/Legend";
 import ZoomButtons from "./zoombuttons/ZoomButtons";
-import { flatMarkersList } from "../markers";
+import { flatMarkersList, MarkerTypes } from "../markers";
 import geographies from "../assets/geodata/map.json";
 
 const MAP_MAX_WIDTH = window.innerWidth;
@@ -197,13 +197,27 @@ class PolyMap extends React.Component {
     }
 
     isMarkerVisible(marker) {
-        const legendItem = this.state.legend.find(i => i.toggles === marker.type);
+        let visible = 1;
 
+        const legendItem = this.state.legend.find(i => i.toggles === marker.type);
         if (legendItem) {
-            return legendItem.isSelected;
+            visible *= legendItem.isSelected;
         }
 
-        return false;
+        if (marker.items) {
+            marker.items.forEach(i => {
+                const legendItem = this.state.legend.find(l => l.toggles === i.type);
+                if (legendItem)
+                    visible *= legendItem.isSelected;
+            });
+        }
+
+        const solar = this.state.legend.find(l => l.toggles === MarkerTypes.solar);
+        if (solar && marker.solar) {
+            visible = solar.isSelected;
+        }
+
+        return !!visible;
     }
 
     projection() {

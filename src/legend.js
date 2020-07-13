@@ -37,26 +37,34 @@ const legend = [
     {
         title: "Карьер",
         icon: IconType.career,
+        toggles: MarkerTypes.career,
         visible: true,
-        toggle: false
+        toggle: true,
+        isSelected: true
     },
     {
         title: "Рудник",
         icon: IconType.mining,
+        toggles: MarkerTypes.mining,
         visible: true,
-        toggle: false
+        toggle: true,
+        isSelected: true
     },
     {
         title: "Фабрика",
         icon: IconType.fabric,
+        toggles: MarkerTypes.fabric,
         visible: true,
-        toggle: false
+        toggle: true,
+        isSelected: true
     },
     {
         title: "Солнечные панели и ветряки",
         icon: IconType.solar,
+        toggles: MarkerTypes.solar,
         visible: true,
-        toggle: false
+        toggle: true,
+        isSelected: true
     }
 ];
 

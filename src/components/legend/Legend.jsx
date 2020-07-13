@@ -5,7 +5,7 @@ import LegendItem from './item/LegendItem';
 import styles from './Legend.module.scss';
 
 
-const Legend = ({ items = [], title = "Легенда", onToggleChanged }) => {
+const Legend = ({ items = [], title = "Условные обозначения", onToggleChanged }) => {
 
     const [collapsed, setCollapsed] = React.useState(true);
 

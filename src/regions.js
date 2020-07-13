@@ -53,7 +53,7 @@ const regions = [
     {
         id: 3,
         name: 'Карелия',
-        geos: [ 'geo-29', 'geo-28' ],
+        geos: [ 'geo-29' ],
         highlighted: true,
         info: {
             climate: 'Неустойчивый',

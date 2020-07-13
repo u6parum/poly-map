@@ -39,12 +39,12 @@ const Markers = {
             y: 25.3
         },
         { 
-            title: "Золото Северного Урала (ЗСУ)", 
+            title: "«Золото Северного Урала» (ЗСУ)", 
             type: MarkerTypes.running,
             solar: false,
             visible: true,
             items: [
-                { type: MarkerTypes.career, text: "Карьер «Воронцовский»" }, 
+                { type: MarkerTypes.career, text: "Карьер Воронцовский" }, 
                 { type: MarkerTypes.mining, text: "Рудник — запуск в 2021 году" }, 
                 { type: MarkerTypes.fabric, text: "Золотоизвлекательная фабрика — кучное выщелачивание" },
                 { type: MarkerTypes.fabric, text: "Золотоизвлекательная фабрика — уголь-в-пульпе" },
@@ -52,17 +52,17 @@ const Markers = {
             x: 38.4, 
             y: 29.3
         },
-        { 
-            title: "«Северо-Калугинское»", 
-            type: MarkerTypes.project,
-            solar: false,
-            visible: true,
-            items: [
-                { type: MarkerTypes.mining, text: "Рудник — запуск в 2020 году" }, 
-            ],
-            x: 35.3, 
-            y: 27.8
-        },
+        // { 
+        //     title: "«Северо-Калугинское»", 
+        //     type: MarkerTypes.project,
+        //     solar: false,
+        //     visible: true,
+        //     items: [
+        //         { type: MarkerTypes.mining, text: "Рудник — запуск в 2020 году" }, 
+        //     ],
+        //     x: 35.3, 
+        //     y: 27.8
+        // },
         { 
             title: "«Краснотурьинск-Полиметалл»", 
             type: MarkerTypes.project,
@@ -76,17 +76,17 @@ const Markers = {
             x: 39.5, 
             y: 29.2
         },
-        { 
-            title: "Саумская горнорудная компания", 
-            type: MarkerTypes.project,
-            solar: false,
-            visible: true,
-            items: [
-                { type: MarkerTypes.career, text: "Карьер — запуск в 2020 году" },
-            ],
-            x: 41.8, 
-            y: 32.7
-        },
+        // { 
+        //     title: "Саумская горнорудная компания", 
+        //     type: MarkerTypes.project,
+        //     solar: false,
+        //     visible: true,
+        //     items: [
+        //         { type: MarkerTypes.career, text: "Карьер — запуск в 2020 году" },
+        //     ],
+        //     x: 41.8, 
+        //     y: 32.7
+        // },
         { 
             title: "Воскресенский", 
             type: MarkerTypes.geosearch,
@@ -183,7 +183,7 @@ const Markers = {
                 { type: MarkerTypes.mining, text: "Рудник «Биркачан»" }, 
                 { type: MarkerTypes.mining, text: "Рудник «Цоколь»" }, 
                 { type: MarkerTypes.mining, text: "Рудник «Ольча»" },
-                { type: MarkerTypes.career, text: "Карьер «Ольча»" }, 
+                { type: MarkerTypes.career, text: "Карьер Ольча" }, 
                 { type: MarkerTypes.career, text: "Карьер Биркачан" }, 
                 { type: MarkerTypes.fabric, text: "Золотоизвлекательная фабрика «Кубака» (уголь-в-пульпе)" },
                 { type: MarkerTypes.fabric, text: "Золотоизвлекательная фабрика «Биркачан» (кучное выщелачивание)" },
@@ -371,19 +371,6 @@ const Markers = {
     ],
     // Карелия
     3: [{ 
-            title: "Санкт-Петербург", 
-            type: MarkerTypes.office,
-            solar: false,
-            items: [
-                { type: MarkerTypes.h, text: "\"Полиметалл УК\"" }, 
-                { type: MarkerTypes.h, text: "\"ТД Полиметалл\"" }, 
-                { type: MarkerTypes.h, text: "\"Полиметалл Инжиниринг\"" }
-            ],
-            visible: true,
-            x: 18.5, 
-            y: 41.4
-        },
-        { 
             title: "Кааламо-1", 
             type: MarkerTypes.geosearch,
             solar: false,
@@ -419,7 +406,7 @@ const Markers = {
     // Чукотка
     4: [
         { 
-            title: "Майское", 
+            title: "«Майское»", 
             type: MarkerTypes.running,
             solar: false,
             visible: true,
@@ -455,7 +442,7 @@ const Markers = {
             type: MarkerTypes.office,
             solar: false,
             visible: true,
-            items: [{ type: MarkerTypes.h, text: "\"Полиметалл Евразия\"" }],
+            items: [{ type: MarkerTypes.h, text: "«Полиметалл Евразия»" }],
             x: 39, 
             y: 16.8
         },
@@ -464,7 +451,7 @@ const Markers = {
             type: MarkerTypes.office,
             solar: false,
             visible: true,
-            items: [{ type: MarkerTypes.h, text: "\"Полиметалл Инжиниринг Казахстан\"" }],
+            items: [{ type: MarkerTypes.h, text: "«Полиметалл Инжиниринг Казахстан»" }],
             x: 50, 
             y: 13
         },
@@ -481,7 +468,7 @@ const Markers = {
             y: 11.8
         },
         { 
-            title: "Варваринское", 
+            title: "«Варваринское»", 
             type: MarkerTypes.running,
             solar: true,
             visible: true,
@@ -603,7 +590,7 @@ const Markers = {
             type: MarkerTypes.office,
             solar: false,
             visible: true,
-            items: [{ type: MarkerTypes.h, text: "Филиал \"ТД Полиметалл\"" }],
+            items: [{ type: MarkerTypes.h, text: "Филиал «ТД Полиметалл»" }],
             x: 104.1, 
             y: 10.5
         },
@@ -613,7 +600,7 @@ const Markers = {
             solar: false,
             visible: true,
             items: [
-                { type: MarkerTypes.h, text: "Филиал \"ТД Полиметалл\"" },
+                { type: MarkerTypes.h, text: "Филиал «ТД Полиметалл»" },
                 { type: MarkerTypes.h, text: "Филиал «Полиметалл УК»" }
             ],
             x: 104.9, 
@@ -634,9 +621,9 @@ const Markers = {
             solar: false,
             visible: true,
             items: [
-                { type: MarkerTypes.fabric, text: "Карьер (Анфиса, Фарида, Екатерина)" }, 
+                { type: MarkerTypes.career, text: "Карьер (Анфиса, Фарида, Екатерина)" }, 
                 { type: MarkerTypes.mining, text: "Рудник" },
-                { type: MarkerTypes.fabric, text: "Обогатительная фабрика Албазино — флотация" },
+                { type: MarkerTypes.fabric, text: "Обогатительная фабрика — флотация" },
             ],
             x: 103.5, 
             y: 21.3
@@ -726,6 +713,20 @@ const Markers = {
             visible: true,
             x: 102.8, 
             y: 22.1
+        },
+    ],
+    8: [{ 
+            title: "Санкт-Петербург", 
+            type: MarkerTypes.office,
+            solar: false,
+            items: [
+                { type: MarkerTypes.h, text: "«Полиметалл УК»" }, 
+                { type: MarkerTypes.h, text: "«ТД Полиметалл»" }, 
+                { type: MarkerTypes.h, text: "«Полиметалл Инжиниринг»" }
+            ],
+            visible: true,
+            x: 18.5, 
+            y: 41.4
         },
     ]
 };
