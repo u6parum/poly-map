@@ -11,7 +11,7 @@ const Info = ({ title, data }) => {
             bodyStyle={{
                 padding: '20px'
             }}
-            cover={<img style={{height: 200, width: 320}} alt={data.picture} src={data.picture} />}
+            cover={<img style={{height: 200, width: "100%"}} alt={data.picture} src={data.picture} />}
         >
             <Row>
                 <Col span={24} className={styles.ColHeader}>

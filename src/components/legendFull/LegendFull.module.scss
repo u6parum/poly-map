@@ -22,8 +22,19 @@
                 display: flex;
                 align-items: center;
 
+                &:hover {
+                    .SectionIcon {
+                        transform: scale(1.1); 
+                    }
+
+                    h1 {
+                        transform: translateX(40px); 
+                    }
+                }
+
                 .SectionIcon {
                     margin-right: 10px;
+                    transition: all .5s ease;
                 }
 
                 h1 {
@@ -31,6 +42,7 @@
                     font-size: 45px;
                     line-height: 55px;
                     color: #333333;
+                    transition: all .5s ease;
                 }
             }
 

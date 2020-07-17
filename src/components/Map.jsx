@@ -197,24 +197,24 @@ class PolyMap extends React.Component {
     }
 
     isMarkerVisible(marker) {
-        let visible = 1;
+        let visible = 0;
 
         const legendItem = this.state.legend.find(i => i.toggles === marker.type);
         if (legendItem) {
-            visible *= legendItem.isSelected;
+            visible += legendItem.isSelected;
         }
 
         if (marker.items) {
             marker.items.forEach(i => {
                 const legendItem = this.state.legend.find(l => l.toggles === i.type);
                 if (legendItem)
-                    visible *= legendItem.isSelected;
+                    visible += legendItem.isSelected;
             });
         }
 
         const solar = this.state.legend.find(l => l.toggles === MarkerTypes.solar);
         if (solar && marker.solar) {
-            visible = solar.isSelected;
+            visible += solar.isSelected;
         }
 
         return !!visible;

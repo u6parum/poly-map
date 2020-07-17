@@ -118,7 +118,7 @@ const LegendFull = ({ defaultRegions, defaultMarkers }) => {
                             }
                             key="3"
                         >
-                            <Row>
+                            <Row gutter={16}>
                                 {geosearch}
                             </Row>
                         </Panel>
