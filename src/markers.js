@@ -39,12 +39,12 @@ const Markers = {
             y: 25.3
         },
         { 
-            title: "«Золото Северного Урала» (ЗСУ)", 
+            title: "Золото Северного Урала (ЗСУ)", 
             type: MarkerTypes.running,
             solar: false,
             visible: true,
             items: [
-                { type: MarkerTypes.career, text: "Карьер Воронцовский" }, 
+                { type: MarkerTypes.career, text: "Карьер «Воронцовский»" }, 
                 { type: MarkerTypes.mining, text: "Рудник — запуск в 2021 году" }, 
                 { type: MarkerTypes.fabric, text: "Золотоизвлекательная фабрика — кучное выщелачивание" },
                 { type: MarkerTypes.fabric, text: "Золотоизвлекательная фабрика — уголь-в-пульпе" },
@@ -183,7 +183,7 @@ const Markers = {
                 { type: MarkerTypes.mining, text: "Рудник «Биркачан»" }, 
                 { type: MarkerTypes.mining, text: "Рудник «Цоколь»" }, 
                 { type: MarkerTypes.mining, text: "Рудник «Ольча»" },
-                { type: MarkerTypes.career, text: "Карьер Ольча" }, 
+                { type: MarkerTypes.career, text: "Карьер «Ольча»" }, 
                 { type: MarkerTypes.career, text: "Карьер Биркачан" }, 
                 { type: MarkerTypes.fabric, text: "Золотоизвлекательная фабрика «Кубака» (уголь-в-пульпе)" },
                 { type: MarkerTypes.fabric, text: "Золотоизвлекательная фабрика «Биркачан» (кучное выщелачивание)" },
@@ -406,7 +406,7 @@ const Markers = {
     // Чукотка
     4: [
         { 
-            title: "«Майское»", 
+            title: "Майское", 
             type: MarkerTypes.running,
             solar: false,
             visible: true,
@@ -468,7 +468,7 @@ const Markers = {
             y: 11.8
         },
         { 
-            title: "«Варваринское»", 
+            title: "Варваринское", 
             type: MarkerTypes.running,
             solar: true,
             visible: true,
