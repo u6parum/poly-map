@@ -39,7 +39,7 @@ const Markers = {
             y: 25.3
         },
         { 
-            title: "Золото Северного Урала (ЗСУ)", 
+            title: "«Золото Северного Урала» (ЗСУ)", 
             type: MarkerTypes.running,
             solar: false,
             visible: true,
