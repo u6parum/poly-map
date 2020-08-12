@@ -9,6 +9,7 @@ import MapContainer from "./hoc/mapContainer/MapContainer";
 import Info from "./info/Info";
 import Marker from "./marker/Marker";
 import Legend from "./legend/Legend";
+import LegendFull from "../components/legendFull/LegendFull";
 import ZoomButtons from "./zoombuttons/ZoomButtons";
 import { flatMarkersList, MarkerTypes } from "../markers";
 import geographies from "../assets/geodata/map.json";
@@ -54,6 +55,8 @@ class PolyMap extends React.Component {
         flatMarkers: flatMarkersList(this.props.defaultMarkers),
         regions: this.props.defaultRegions,
         selectedRegion: null,
+        selectedMarker: null,
+        openedMarker: null,
         position: {
             coordinates: MAP_CENTER_COORDS,
             zoom: 1
@@ -75,6 +78,7 @@ class PolyMap extends React.Component {
         this.getMarkers = this.getMarkers.bind(this);
         this.getGeography = this.getGeography.bind(this);
         this.handleMarkerClick = this.handleMarkerClick.bind(this);
+        this.handleLegendItemClick = this.handleLegendItemClick.bind(this);
         this.onLegendItemToggleChange = this.onLegendItemToggleChange.bind(this);
         this.isMarkerVisible = this.isMarkerVisible.bind(this);
     }
@@ -99,6 +103,7 @@ class PolyMap extends React.Component {
 
     handleZoomReset() {
         this.setState({ position: { coordinates: MAP_CENTER_COORDS, zoom: 1 } });
+        this.setState({ selectedMarker: null });
     }
 
     selectRegionById(regionId) {
@@ -111,6 +116,12 @@ class PolyMap extends React.Component {
         this.setState({ selectedRegion: region });
     }
 
+    selectMarkerByTitle(markerTitle) {
+        const selectedMarker = this.state.flatMarkers.find(m => m.title === markerTitle) || null;
+        this.setState({ selectedMarker });
+        console.log(selectedMarker);
+    }
+
     handleGeographyClick(geography) {
         const path = geoPath().projection(this.projection());
         const centroid = this.projection().invert(path.centroid(geography));
@@ -121,20 +132,26 @@ class PolyMap extends React.Component {
         };
 
         this.setState({ position: newPosition, bypass: false });
+        this.setState({ selectedMarker: null });
 
         this.selectRegionByGeoId(geography.rsmKey);
     }
 
-    handleMarkerClick([x, y], regionId) {
+    handleMarkerClick([x, y], regionId, markerTitle, bypassAnimation = false) {
         this.setState({
             position: {
                 coordinates: [x, y],
                 zoom: 8
             },
-            bypass: false
+            bypass: bypassAnimation
         });
 
+        this.selectMarkerByTitle(markerTitle);
         this.selectRegionById(regionId);
+    }
+
+    handleLegendItemClick(marker) {
+        this.handleMarkerClick([marker.x, marker.y], marker.regionId, marker.title, true);
     }
 
     getGeographyStyle(geo) {
@@ -179,6 +196,7 @@ class PolyMap extends React.Component {
                         solidColor={marker.solidColor}
                         title={marker.title}
                         items={marker.items}
+                        isOpened={marker.title === this.state.openedMarker?.title}
                         onClick={this.handleMarkerClick}
                     />
                 )
@@ -226,58 +244,78 @@ class PolyMap extends React.Component {
 
     render() {
         return (
-            <MapContainer>
-                <Legend items={this.state.legend} onToggleChanged={this.onLegendItemToggleChange} />
-                <ComposableMap
-                    projection={this.projection()}
-                    width={MAP_MAX_WIDTH}
-                    height={MAP_MAX_HEIGHT}
-                    style={{
-                        width: "100%",
-                        height: window.innerHeight - 6,
-                    }}
-                >
-                    <Spring
-                        from={{
-                            zoom: 1,
-                            coordinates: MAP_CENTER_COORDS
+            <>
+                <MapContainer>
+                    <Legend items={this.state.legend} onToggleChanged={this.onLegendItemToggleChange} />
+                    <ComposableMap
+                        projection={this.projection()}
+                        width={MAP_MAX_WIDTH}
+                        height={MAP_MAX_HEIGHT}
+                        style={{
+                            width: "100%",
+                            height: window.innerHeight - 6,
                         }}
-                        to={{
-                            zoom: this.state.position.zoom,
-                            coordinates: this.state.position.coordinates
-                        }}
-                        immediate={this.state.bypass}
-                        config={config.fast}
                     >
-                        {(styles) => (
-                            <ZoomableGroup
-                                zoom={styles.zoom}
-                                center={styles.coordinates}
-                                onMoveStart={this.handleMoveStart}
-                                onMoveEnd={this.handleMoveEnd}
-                            >
-                                <SVGDropShadow>
-                                    <Geographies geography={geographies}>
-                                        {({ geographies, projection }) =>
-                                            geographies.map(geo => this.getGeography(geo, projection))
-                                        }
-                                    </Geographies>
-                                </SVGDropShadow>
+                        <Spring
+                            from={{
+                                zoom: 1,
+                                coordinates: MAP_CENTER_COORDS
+                            }}
+                            to={{
+                                zoom: this.state.position.zoom,
+                                coordinates: this.state.position.coordinates
+                            }}
+                            onStart={() => {
+                                this.setState({ openedMarker: null });
+                            }}
+                            onRest={() => {
+                                const selectedMarker = {...this.state.selectedMarker};
+                                this.setState({ openedMarker: selectedMarker });
+                            }}
+                            immediate={this.state.bypass}
+                            config={config.fast}
+                        >
+                            {(styles) => (
+                                <ZoomableGroup
+                                    zoom={styles.zoom}
+                                    center={styles.coordinates}
+                                    onMoveStart={this.handleMoveStart}
+                                    onMoveEnd={this.handleMoveEnd}
+                                >
+                                    <SVGDropShadow>
+                                        <Geographies geography={geographies}>
+                                            {({ geographies, projection }) =>
+                                                geographies.map(geo => this.getGeography(geo, projection))
+                                            }
+                                        </Geographies>
+                                    </SVGDropShadow>
 
-                                {this.getMarkers()}
+                                    {this.getMarkers()}
 
-                            </ZoomableGroup>
-                        )}
-                    </Spring>
-                </ComposableMap>
-                {this.state.selectedRegion ? <Info title={this.state.selectedRegion.name} data={this.state.selectedRegion.info} /> : null}
+                                </ZoomableGroup>
+                            )}
+                        </Spring>
+                    </ComposableMap>
+                    {this.state.selectedRegion ? <Info title={this.state.selectedRegion.name} data={this.state.selectedRegion.info} /> : null}
 
-                <ZoomButtons
-                    zoomIn={this.handleZoomIn}
-                    zoomOut={this.handleZoomOut}
-                    zoomReset={this.handleZoomReset}
-                />
-            </MapContainer>
+                    <ZoomButtons
+                        zoomIn={this.handleZoomIn}
+                        zoomOut={this.handleZoomOut}
+                        zoomReset={this.handleZoomReset}
+                    />
+                </MapContainer>
+                <div className="container-fluid">
+                    <div className="row">
+                        <div className="col-12">
+                            <LegendFull
+                                defaultRegions={this.props.defaultRegions}
+                                defaultMarkers={this.props.defaultMarkers}
+                                itemClick={this.handleLegendItemClick}
+                            />
+                        </div>
+                    </div>
+                </div>
+            </>
         );
     }
 }

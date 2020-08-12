@@ -6,18 +6,18 @@ import { MarkerColors, MarkerTypes } from "../../markers";
 import Content from '../Content/Content';
 import Title from '../Title/Title';
 
-const MapMarker = ({ x, y, type, title, solar, regionId, onClick, radius = 10, items = [], visible = false }) => {
+const MapMarker = ({ x, y, type, title, solar, regionId, onClick, isOpened, radius = 10, items = [], visible = false }) => {
 
-    //const [isHovered, setHovered] = useState(false);
+    const [isHovered, setHoveredState] = React.useState(false);
 
     const marker = (
         <Marker
             display={visible ? '' : 'none'}
             coordinates={[x, y]} 
-            cursor="pointer" 
-            //onMouseEnter={() => setHovered(true)} 
-            //onMouseLeave={() => setHovered(false)}
-            onClick={(e) => onClick([x, y], regionId)}
+            cursor="pointer"
+            onMouseEnter={(e) => setHoveredState(true)}
+            onMouseLeave={(e) => setHoveredState(false)}
+            onClick={(e) => onClick([x, y], regionId, title)}
         >
             {
                 radius < 4 ?
@@ -43,6 +43,8 @@ const MapMarker = ({ x, y, type, title, solar, regionId, onClick, radius = 10, i
 
     return (
         <Popover
+            trigger="hover"
+            visible={isOpened || isHovered}
             title={
                 type === MarkerTypes.geosearch || items.length === 0 ? null : <Title text={title} solar={solar} />
             } 

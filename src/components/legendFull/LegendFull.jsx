@@ -13,7 +13,7 @@ import { flatMarkersList } from "../../markers";
 const { Panel } = Collapse;
 
 
-const LegendFull = ({ defaultRegions, defaultMarkers }) => {
+const LegendFull = ({ defaultRegions, defaultMarkers, itemClick }) => {
 
     const unique = (values) => values.filter((v, i) => values.indexOf(v) === i);
 
@@ -32,7 +32,7 @@ const LegendFull = ({ defaultRegions, defaultMarkers }) => {
                     .map(rm => (
                         <div key={`${rm.title}_${rm.x}_${rm.y}`} style={{ marginTop: 16 }}>
                             <Title text={rm.title} solar={rm.solar} />
-                            <Content items={rm.items} maxWidth={400} />
+                            <Content items={rm.items} maxWidth={400} clickable marker={rm} selectMarker={itemClick} />
                         </div>
                     ))
                 }
@@ -50,7 +50,7 @@ const LegendFull = ({ defaultRegions, defaultMarkers }) => {
                     .map(rm => (
                         <div key={`${rm.title}_${rm.x}_${rm.y}`} style={{ marginTop: 16 }}>
                             <Title text={rm.title} solar={rm.solar} />
-                            <Content items={rm.items} maxWidth={400} />
+                            <Content items={rm.items} maxWidth={400} clickable marker={rm} selectMarker={itemClick} />
                         </div>
                     ))
                 }
@@ -61,9 +61,7 @@ const LegendFull = ({ defaultRegions, defaultMarkers }) => {
     const geosearch = flatMarkers
         .filter(m => m.type === MarkerTypes.geosearch)
         .map(rm => (
-            <Col key={`${rm.title}_${rm.x}_${rm.y}`} sm={24} md={12} lg={6}>
-                <p className={styles.GeoSearchP}>{rm.title}</p>
-            </Col>
+            <Content contentType="itemSimple" clickable marker={rm} selectMarker={itemClick} />
         ));
 
 

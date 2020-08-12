@@ -1,3 +1,27 @@
 .H4 {
     font-size: 1rem;
 }
+
+.item {
+    display: flex;
+    align-items: center;
+    cursor: default;
+
+    &.clickable {
+        cursor: pointer;
+        transition: all .2s ease-in-out;
+
+        &:hover {
+            transform: translateX(4px);
+        }
+    }
+
+    .GeoSearchP {
+        font-style: normal;
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 24px;
+        color: #333333;
+
+    }
+}

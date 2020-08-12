@@ -14,7 +14,6 @@ import "antd/es/switch/style/css";
 import './App.scss';
 
 import PolyMap from './components/Map';
-import LegendFull from "./components/legendFull/LegendFull";
 
 import defaultMarkers from './markers';
 import defaultLegend from './legend';
@@ -44,16 +43,6 @@ const App = () => (
 			defaultMarkers={defaultMarkers}
 			defaultRegions={defaultRegions}
 		/>
-		<div className="container-fluid">
-			<div className="row">
-				<div className="col-12">
-					<LegendFull
-						defaultRegions={defaultRegions}
-						defaultMarkers={defaultMarkers}
-					/>
-				</div>
-			</div>
-		</div>
 	</div>
 );
 
