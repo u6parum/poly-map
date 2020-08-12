@@ -116,10 +116,9 @@ class PolyMap extends React.Component {
         this.setState({ selectedRegion: region });
     }
 
-    selectMarkerByTitle(markerTitle) {
-        const selectedMarker = this.state.flatMarkers.find(m => m.title === markerTitle) || null;
+    selectMarkerById(markerId) {
+        const selectedMarker = this.state.flatMarkers.find(m => m.id === markerId) || null;
         this.setState({ selectedMarker });
-        console.log(selectedMarker);
     }
 
     handleGeographyClick(geography) {
@@ -137,7 +136,7 @@ class PolyMap extends React.Component {
         this.selectRegionByGeoId(geography.rsmKey);
     }
 
-    handleMarkerClick([x, y], regionId, markerTitle, bypassAnimation = false) {
+    handleMarkerClick([x, y], regionId, markerId, bypassAnimation = false) {
         this.setState({
             position: {
                 coordinates: [x, y],
@@ -146,12 +145,12 @@ class PolyMap extends React.Component {
             bypass: bypassAnimation
         });
 
-        this.selectMarkerByTitle(markerTitle);
+        this.selectMarkerById(markerId);
         this.selectRegionById(regionId);
     }
 
     handleLegendItemClick(marker) {
-        this.handleMarkerClick([marker.x, marker.y], marker.regionId, marker.title, true);
+        this.handleMarkerClick([marker.x, marker.y], marker.regionId, marker.id, true);
     }
 
     getGeographyStyle(geo) {
@@ -189,6 +188,7 @@ class PolyMap extends React.Component {
                         visible={this.isMarkerVisible(marker)}
                         solar={marker.solar}
                         regionId={marker.regionId}
+                        id={marker.id}
                         x={marker.x}
                         y={marker.y}
                         radius={this.state.markersRadius}
@@ -196,7 +196,7 @@ class PolyMap extends React.Component {
                         solidColor={marker.solidColor}
                         title={marker.title}
                         items={marker.items}
-                        isOpened={marker.title === this.state.openedMarker?.title && marker.x === this.state.openedMarker?.x && marker.y === this.state.openedMarker?.y}
+                        isOpened={marker.id === this.state.openedMarker?.id}
                         onClick={this.handleMarkerClick}
                     />
                 )

@@ -732,6 +732,13 @@ const Markers = {
 };
 
 
+for (const k in Markers) {
+    for (const v of Markers[k]) {
+        v["id"] = '_' + Math.random().toString(36).substr(2, 9);
+    }
+}
+
+
 export function flatMarkersList(markersList, regionIdKeyName = "regionId") {
     const flatMarkers = [];
 

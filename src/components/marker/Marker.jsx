@@ -6,7 +6,7 @@ import { MarkerColors, MarkerTypes } from "../../markers";
 import Content from '../Content/Content';
 import Title from '../Title/Title';
 
-const MapMarker = ({ x, y, type, title, solar, regionId, onClick, isOpened, radius = 10, items = [], visible = false }) => {
+const MapMarker = ({ id, x, y, type, title, solar, regionId, onClick, isOpened, radius = 10, items = [], visible = false }) => {
 
     const [isHovered, setHoveredState] = React.useState(false);
 
@@ -17,7 +17,7 @@ const MapMarker = ({ x, y, type, title, solar, regionId, onClick, isOpened, radi
             cursor="pointer"
             onMouseEnter={(e) => setHoveredState(true)}
             onMouseLeave={(e) => setHoveredState(false)}
-            onClick={(e) => onClick([x, y], regionId, title)}
+            onClick={(e) => onClick([x, y], regionId, id)}
         >
             {
                 radius < 4 ?
