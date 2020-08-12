@@ -196,7 +196,7 @@ class PolyMap extends React.Component {
                         solidColor={marker.solidColor}
                         title={marker.title}
                         items={marker.items}
-                        isOpened={marker.title === this.state.openedMarker?.title}
+                        isOpened={marker.title === this.state.openedMarker?.title && marker.x === this.state.openedMarker?.x && marker.y === this.state.openedMarker?.y}
                         onClick={this.handleMarkerClick}
                     />
                 )
