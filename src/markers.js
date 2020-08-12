@@ -39,7 +39,7 @@ const Markers = {
             y: 25.3
         },
         { 
-            title: "«Золото Северного Урала» (ЗСУ)", 
+            title: "Золото Северного Урала (ЗСУ)", 
             type: MarkerTypes.running,
             solar: false,
             visible: true,
@@ -64,7 +64,7 @@ const Markers = {
         //     y: 27.8
         // },
         { 
-            title: "«Краснотурьинск-Полиметалл»", 
+            title: "Краснотурьинск-Полиметалл", 
             type: MarkerTypes.project,
             solar: false,
             visible: true,
@@ -192,7 +192,7 @@ const Markers = {
             y: 40.4
         },
         { 
-            title: "«Серебро Магадана»", 
+            title: "Серебро Магадана", 
             type: MarkerTypes.running,
             solar: false,
             visible: true,
@@ -206,7 +206,7 @@ const Markers = {
             y: 36.5
         },
         { 
-            title: "«Приморское»", 
+            title: "Приморское", 
             type: MarkerTypes.project,
             solar: false,
             visible: true,
@@ -406,7 +406,7 @@ const Markers = {
     // Чукотка
     4: [
         { 
-            title: "«Майское»", 
+            title: "Майское", 
             type: MarkerTypes.running,
             solar: false,
             visible: true,
@@ -468,7 +468,7 @@ const Markers = {
             y: 11.8
         },
         { 
-            title: "«Варваринское»", 
+            title: "Варваринское", 
             type: MarkerTypes.running,
             solar: true,
             visible: true,
