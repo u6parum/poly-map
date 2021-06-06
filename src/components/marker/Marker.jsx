@@ -5,15 +5,29 @@ import Icon from "../helpers/icon/Icon";
 import { MarkerColors, MarkerTypes } from "../../markers";
 import Content from '../Content/Content';
 import Title from '../Title/Title';
+import FactoryDetailsComponent from '../factoryDetails/FactoryDetails';
 
-const MapMarker = ({ id, x, y, type, title, solar, regionId, onClick, isOpened, radius = 10, items = [], visible = false }) => {
+const MapMarker = ({
+    id,
+    x,
+    y,
+    type,
+    title,
+    solar,
+    regionId,
+    onClick,
+    isOpened,
+    radius = 10,
+    items = [],
+    visible = false
+}) => {
 
     const [isHovered, setHoveredState] = React.useState(false);
 
     const marker = (
         <Marker
             display={visible ? '' : 'none'}
-            coordinates={[x, y]} 
+            coordinates={[x, y]}
             cursor="pointer"
             onMouseEnter={(e) => setHoveredState(true)}
             onMouseLeave={(e) => setHoveredState(false)}
@@ -23,12 +37,23 @@ const MapMarker = ({ id, x, y, type, title, solar, regionId, onClick, isOpened, 
                 radius < 4 ?
                     <circle r={radius} fill={MarkerColors[type]} /> :
                     <>
+                        <text textAnchor="end" textDecoration={isHovered && "underline"} x="-10" y="4" fill="#000">
+                            {title}
+                        </text>
                         <Icon svgImage size={[radius * 2, radius * 2]} name={type} />
-                        { solar ? <Icon svgImage name="solar" size={[radius * 1.5, radius * 1.5]} x={-radius * 1.5} y={-radius * 1.5} /> : null }
+                        { solar ? <Icon svgImage name="solar" size={[radius * 1.5, radius * 1.5]} x={-radius * 1.5} y={-radius * 1.5} /> : null}
                     </>
             }
         </Marker>
     );
+
+    if (isOpened) {
+        return <FactoryDetailsComponent />
+    }
+
+    if (!items.length) {
+        return marker;
+    }
 
     const content = (<Content items={items} maxWidth={300} />);
 
@@ -47,8 +72,8 @@ const MapMarker = ({ id, x, y, type, title, solar, regionId, onClick, isOpened, 
             visible={isOpened || isHovered}
             title={
                 type === MarkerTypes.geosearch || items.length === 0 ? null : <Title text={title} solar={solar} />
-            } 
-            content={type === MarkerTypes.geosearch || items.length === 0 ? <b>{title}</b> : content} 
+            }
+            content={type === MarkerTypes.geosearch || items.length === 0 ? <b>{title}</b> : content}
             {...rest}
         >
             {marker}

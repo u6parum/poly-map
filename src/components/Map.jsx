@@ -103,7 +103,7 @@ class PolyMap extends React.Component {
 
     handleZoomReset() {
         this.setState({ position: { coordinates: MAP_CENTER_COORDS, zoom: 1 } });
-        this.setState({ selectedMarker: null });
+        this.setState({ selectedMarker: null, selectedRegion: null });
     }
 
     selectRegionById(regionId) {
@@ -244,78 +244,64 @@ class PolyMap extends React.Component {
 
     render() {
         return (
-            <>
-                <MapContainer>
-                    <Legend items={this.state.legend} onToggleChanged={this.onLegendItemToggleChange} />
-                    <ComposableMap
-                        projection={this.projection()}
-                        width={MAP_MAX_WIDTH}
-                        height={MAP_MAX_HEIGHT}
-                        style={{
-                            width: "100%",
-                            height: window.innerHeight - 6,
+            <MapContainer>
+                <ComposableMap
+                    projection={this.projection()}
+                    width={MAP_MAX_WIDTH}
+                    height={MAP_MAX_HEIGHT}
+                    style={{
+                        width: "100%",
+                        height: window.innerHeight - 6,
+                    }}
+                >
+                    <Spring
+                        from={{
+                            zoom: 1,
+                            coordinates: MAP_CENTER_COORDS
                         }}
+                        to={{
+                            zoom: this.state.position.zoom,
+                            coordinates: this.state.position.coordinates
+                        }}
+                        onStart={() => {
+                            const selectedMarker = {...this.state.selectedMarker};
+                            this.setState({ openedMarker: selectedMarker });
+                        }}
+                        onRest={() => {
+                            
+                        }}
+                        immediate={this.state.bypass}
+                        config={config.fast}
                     >
-                        <Spring
-                            from={{
-                                zoom: 1,
-                                coordinates: MAP_CENTER_COORDS
-                            }}
-                            to={{
-                                zoom: this.state.position.zoom,
-                                coordinates: this.state.position.coordinates
-                            }}
-                            onStart={() => {
-                                this.setState({ openedMarker: null });
-                            }}
-                            onRest={() => {
-                                const selectedMarker = {...this.state.selectedMarker};
-                                this.setState({ openedMarker: selectedMarker });
-                            }}
-                            immediate={this.state.bypass}
-                            config={config.fast}
-                        >
-                            {(styles) => (
-                                <ZoomableGroup
-                                    zoom={styles.zoom}
-                                    center={styles.coordinates}
-                                    onMoveStart={this.handleMoveStart}
-                                    onMoveEnd={this.handleMoveEnd}
-                                >
-                                    <SVGDropShadow>
-                                        <Geographies geography={geographies}>
-                                            {({ geographies, projection }) =>
-                                                geographies.map(geo => this.getGeography(geo, projection))
-                                            }
-                                        </Geographies>
-                                    </SVGDropShadow>
+                        {(styles) => (
+                            <ZoomableGroup
+                                zoom={styles.zoom}
+                                center={styles.coordinates}
+                                onMoveStart={this.handleMoveStart}
+                                onMoveEnd={this.handleMoveEnd}
+                            >
+                                <SVGDropShadow>
+                                    <Geographies geography={geographies}>
+                                        {({ geographies, projection }) =>
+                                            geographies.map(geo => this.getGeography(geo, projection))
+                                        }
+                                    </Geographies>
+                                </SVGDropShadow>
 
-                                    {this.getMarkers()}
+                                {this.getMarkers()}
 
-                                </ZoomableGroup>
-                            )}
-                        </Spring>
-                    </ComposableMap>
-                    {this.state.selectedRegion ? <Info title={this.state.selectedRegion.name} data={this.state.selectedRegion.info} /> : null}
+                            </ZoomableGroup>
+                        )}
+                    </Spring>
+                </ComposableMap>
+                {this.state.selectedRegion ? <Info title={this.state.selectedRegion.name} data={this.state.selectedRegion.info} /> : null}
 
-                    <ZoomButtons
-                        zoomIn={this.handleZoomIn}
-                        zoomOut={this.handleZoomOut}
-                        zoomReset={this.handleZoomReset}
-                    />
-                </MapContainer>
-                <div className="container-fluid">
-                    <div className="row">
-                        <div className="col-12">
-                            <LegendFull
-                                defaultRegions={this.props.defaultRegions}
-                                defaultMarkers={this.props.defaultMarkers}
-                                itemClick={this.handleLegendItemClick}
-                            />
-                        </div>
-                    </div>
-                </div>
-            </>
+                <ZoomButtons
+                    zoomIn={this.handleZoomIn}
+                    zoomOut={this.handleZoomOut}
+                    zoomReset={this.handleZoomReset}
+                />
+            </MapContainer>
         );
     }
 }
