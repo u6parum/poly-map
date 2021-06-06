@@ -17,6 +17,7 @@ import project from '../../../assets/icons/project.svg';
 import running from '../../../assets/icons/running.svg';
 import solar from '../../../assets/icons/solar.svg';
 import caret from '../../../assets/icons/caret.svg';
+import factory from '../../../assets/icons/factory.png';
 
 export const IconType = {
     'rainy': 'rainy',
@@ -29,6 +30,7 @@ export const IconType = {
     'zontik': 'zontik',
     'career': 'career',
     'fabric': 'fabric',
+    'factory': 'factory',
     'geosearch': 'geosearch',
     'mining': 'mining',
     'office': 'office',
@@ -64,6 +66,7 @@ const Icon = ({ name, style, x, y, size = [50, 50], svgImage = false }) => {
         case 'running': src = running; break;
         case 'solar': src = solar; break;
         case 'caret': src = caret; break;
+        case 'factory': src = factory; break;
         default: break;
     }
 

@@ -3,7 +3,7 @@ import { Button } from 'antd';
 import styles from "./ZoomButtons.module.scss";
 
 
-const ZoomButtons = ({ zoomIn, zoomOut, zoomReset }) => {
+const ZoomButtons = React.memo(({ zoomIn, zoomOut, zoomReset }) => {
     return (
         <div className={styles.ZoomButtons}>
             <Button className={styles.Plus} onClick={zoomIn}> </Button>
@@ -11,6 +11,6 @@ const ZoomButtons = ({ zoomIn, zoomOut, zoomReset }) => {
             <Button className={styles.Reset} onClick={zoomReset}> </Button>
         </div>
     );
-}
+});
 
 export default ZoomButtons;

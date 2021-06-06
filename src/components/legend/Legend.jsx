@@ -5,8 +5,8 @@ import LegendItem from './item/LegendItem';
 import styles from './Legend.module.scss';
 
 
-const Legend = ({ items = [], title = "Условные обозначения", onToggleChanged }) => {
-
+const Legend = React.memo(({ items = [], title = "Условные обозначения", onToggleChanged }) => {
+    
     const [collapsed, setCollapsed] = React.useState(true);
 
     const legendItems = items.map(item => (
@@ -51,6 +51,6 @@ const Legend = ({ items = [], title = "Условные обозначения",
             </Row>
         </Card>
     );
-}
+});
  
 export default Legend;

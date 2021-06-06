@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { Collapse, Row, Col } from "antd";
 import { DownOutlined } from "@ant-design/icons";
 import styles from "./LegendFull.module.scss";
@@ -13,15 +13,15 @@ import { flatMarkersList } from "../../markers";
 const { Panel } = Collapse;
 
 
-const LegendFull = ({ defaultRegions, defaultMarkers, itemClick }) => {
+const LegendFull = React.memo(({ defaultRegions, defaultMarkers, itemClick }) => {
 
-    const unique = (values) => values.filter((v, i) => values.indexOf(v) === i);
+    const unique = useCallback((values) => values.filter((v, i) => values.indexOf(v) === i), []);
 
-    const flatMarkers = flatMarkersList(defaultMarkers);
-    const runningMarkers = flatMarkers.filter(m => m.type === MarkerTypes.running);
-    const projectMarkers = flatMarkers.filter(m => m.type === MarkerTypes.project);
+    const flatMarkers = useMemo(() => flatMarkersList(defaultMarkers), [defaultMarkers]);
+    const runningMarkers = useMemo(() => flatMarkers.filter(m => m.type === MarkerTypes.running), [flatMarkers]);
+    const projectMarkers = useMemo(() => flatMarkers.filter(m => m.type === MarkerTypes.project), [flatMarkers]);
 
-    const running = unique(runningMarkers
+    const running = useMemo(() => unique(runningMarkers
         .map(m => defaultRegions.find(reg => reg.id === m.regionId)))
         .map(r => (
             <div key={r.id}>
@@ -37,9 +37,9 @@ const LegendFull = ({ defaultRegions, defaultMarkers, itemClick }) => {
                     ))
                 }
             </div>
-        ));
+        )), [defaultRegions, itemClick, unique, runningMarkers]);
 
-    const project = unique(projectMarkers
+    const project = useMemo(() => unique(projectMarkers
         .map(m => defaultRegions.find(reg => reg.id === m.regionId)))
         .map(r => (
             <div key={r.id}>
@@ -55,14 +55,14 @@ const LegendFull = ({ defaultRegions, defaultMarkers, itemClick }) => {
                     ))
                 }
             </div>
-        ));
+        )), [defaultRegions, itemClick, unique, projectMarkers]);
 
 
-    const geosearch = flatMarkers
+    const geosearch = useMemo(() => flatMarkers
         .filter(m => m.type === MarkerTypes.geosearch)
         .map(rm => (
-            <Content contentType="itemSimple" clickable marker={rm} selectMarker={itemClick} />
-        ));
+            <Content key={rm.id} contentType="itemSimple" clickable marker={rm} selectMarker={itemClick} />
+        )), [itemClick, flatMarkers]);
 
 
 
@@ -125,6 +125,6 @@ const LegendFull = ({ defaultRegions, defaultMarkers, itemClick }) => {
             </Row>
         </section>
     );
-}
+});
 
 export default LegendFull;

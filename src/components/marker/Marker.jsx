@@ -29,7 +29,7 @@ const MapMarker = ({
             display={visible ? '' : 'none'}
             coordinates={[x, y]}
             cursor="pointer"
-            onMouseEnter={(e) => setHoveredState(true)}
+            onMouseEnter={(e) => { e.persist(); onMarkerMouseEnter(e.relatedTarget); setHoveredState(true); }}
             onMouseLeave={(e) => setHoveredState(false)}
             onClick={(e) => onClick([x, y], regionId, id)}
         >
@@ -37,7 +37,7 @@ const MapMarker = ({
                 radius < 4 ?
                     <circle r={radius} fill={MarkerColors[type]} /> :
                     <>
-                        <text textAnchor="end" textDecoration={isHovered && "underline"} x="-10" y="4" fill="#000">
+                        <text textAnchor="end" textDecoration={(isHovered || isOpened) && "underline"} x="-10" y="4" fill="#000">
                             {title}
                         </text>
                         <Icon svgImage size={[radius * 2, radius * 2]} name={type} />
@@ -64,7 +64,6 @@ const MapMarker = ({
             placement: "rightTop"
         }
     }
-
 
     return (
         <Popover
