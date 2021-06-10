@@ -35,27 +35,37 @@ const FactoryDetailsComponent = ({
     return dd;
   };
 
-  const handleIndirectItemClick = useCallback((e) => {
-    setShowDetailsType("indirect");
-    setShowDetails(true);
-    setDetailsData(
-      getModalData(
-        e.target.attributes["type"].value,
-        modalData.indirectInfluence
-      )
-    );
-  }, [modalData]);
+  const handleIndirectItemClick = useCallback(
+    (e) => {
+      setShowDetailsType("indirect");
+      setShowDetails(true);
+      setDetailsData(
+        getModalData(
+          e.target.attributes["type"].value,
+          modalData.indirectInfluence
+        )
+      );
+    },
+    [modalData]
+  );
 
-  const handleDirectItemClick = useCallback((e) => {
-    setShowDetailsType("direct");
-    setShowDetails(true);
-    setDetailsData(
-      getModalData(e.target.attributes["type"].value, modalData.directInfluence)
-    );
-  }, [modalData]);
+  const handleDirectItemClick = useCallback(
+    (e) => {
+      setShowDetailsType("direct");
+      setShowDetails(true);
+      setDetailsData(
+        getModalData(
+          e.target.attributes["type"].value,
+          modalData.directInfluence
+        )
+      );
+    },
+    [modalData]
+  );
 
   const renderGroupArticles = (data) => {
-    if (!data || Array.from(data).length === 0) return <p style={{ marginLeft: 24 }}>НЕ ЗАФИКСИРОВАНО</p>;
+    if (!data || Array.from(data).length === 0)
+      return <p style={{ marginLeft: 24 }}>НЕ ЗАФИКСИРОВАНО</p>;
     return data.map((article) => (
       <article key={article.title}>
         <p>
@@ -77,15 +87,22 @@ const FactoryDetailsComponent = ({
     >
       <defs id="defs6">
         <clipPath patternUnits="userSpaceOnUse" id="clip">
-          <circle cx="2%" cy="2%" r="6" ></circle>
+          <circle cx="2%" cy="2%" r="6"></circle>
         </clipPath>
-        <filter filterUnits="objectBoundingBox" id="invert" x="0" y="0" height="1" width="1">
+        <filter
+          filterUnits="objectBoundingBox"
+          id="invert"
+          x="0"
+          y="0"
+          height="1"
+          width="1"
+        >
           {/* <feFlood flood-color="rgb(255,255,255)" result="background" /> */}
           <feBlend mode="normal" in="SourceGraphic" in2="background" />
           <feComponentTransfer>
-              <feFuncR type="table" tableValues="1 0"/>
-              <feFuncG type="table" tableValues="1 0"/>
-              <feFuncB type="table" tableValues="1 0"/>
+            <feFuncR type="table" tableValues="1 0" />
+            <feFuncG type="table" tableValues="0.6039215 0" />
+            <feFuncB type="table" tableValues="0 0" />
           </feComponentTransfer>
         </filter>
       </defs>
@@ -129,7 +146,14 @@ const FactoryDetailsComponent = ({
         stroke="white"
         strokeWidth={1}
       />
-      <image id="factory" xlinkHref={factory} x="194" y="194" width="12" height="12" />
+      <image
+        id="factory"
+        xlinkHref={factory}
+        x="194"
+        y="194"
+        width="12"
+        height="12"
+      />
       <text>
         <textPath
           filter="url('#dropshadow2')"
@@ -158,7 +182,7 @@ const FactoryDetailsComponent = ({
         <>
           {indirectItems.animal && (
             <image
-              id="animal"
+              filter="url('#dropshadow2')"
               x="170"
               y="128"
               width="12"
@@ -170,6 +194,7 @@ const FactoryDetailsComponent = ({
           )}
           {indirectItems.bird && (
             <image
+              filter="url('#dropshadow2')"
               x="125"
               y="200"
               width="12"
@@ -181,6 +206,7 @@ const FactoryDetailsComponent = ({
           )}
           {indirectItems.fish && (
             <image
+              filter="url('#dropshadow2')"
               x="180"
               y="262"
               width="12"
@@ -192,6 +218,7 @@ const FactoryDetailsComponent = ({
           )}
           {indirectItems.plant && (
             <image
+              filter="url('#dropshadow2')"
               x="254"
               y="230"
               width="12"
@@ -208,6 +235,7 @@ const FactoryDetailsComponent = ({
         <>
           {directItems.animal && (
             <image
+              filter="url('#dropshadow2')"
               x="173"
               y="168"
               width="10"
@@ -219,6 +247,7 @@ const FactoryDetailsComponent = ({
           )}
           {directItems.bird && (
             <image
+              filter="url('#dropshadow2')"
               x="160"
               y="200"
               width="10"
@@ -230,6 +259,7 @@ const FactoryDetailsComponent = ({
           )}
           {directItems.fish && (
             <image
+              filter="url('#dropshadow2')"
               x="180"
               y="226"
               width="10"
@@ -241,6 +271,7 @@ const FactoryDetailsComponent = ({
           )}
           {directItems.plant && (
             <image
+              filter="url('#dropshadow2')"
               x="212"
               y="225"
               width="10"
