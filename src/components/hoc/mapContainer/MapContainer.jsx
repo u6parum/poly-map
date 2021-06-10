@@ -11,7 +11,7 @@ export const getMapContainerScrollTopPosition = () => {
 
 const MapContainer = ({ children }) => {
     return (
-        <div className={styles.MapContainer}>
+        <div className={styles.MapContainer} id="polymap">
             {children}
         </div>
     );

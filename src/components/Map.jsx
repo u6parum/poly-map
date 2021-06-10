@@ -6,11 +6,11 @@ import { Spring } from 'react-spring/renderprops';
 
 import SVGDropShadow from "./hoc/svgDropShadow/SVGDropShadow";
 import MapContainer from "./hoc/mapContainer/MapContainer";
-import Info from "./info/Info";
 import Marker from "./marker/Marker";
 import ZoomButtons from "./zoombuttons/ZoomButtons";
-import { flatMarkersList, MarkerTypes } from "../markers";
+import { flatMarkersList, MarkerTypes } from "../utils";
 import geographies from "../assets/geodata/map.json";
+import FactoryInfo from "./info/FactoryInfo";
 
 const MAP_MAX_WIDTH = window.innerWidth;
 const MAP_MAX_HEIGHT = window.innerHeight;
@@ -60,7 +60,10 @@ class PolyMap extends React.Component {
         openedMarker: null,
         position: initialPosition,
         bypass: false,
-        markersRadius: 4
+        markersRadius: 4,
+        mappedDirectItems: {},
+        mappedIndirectItems: {},
+        markerModalData: {},
     }
 
     constructor(props) {
@@ -116,7 +119,15 @@ class PolyMap extends React.Component {
 
     selectMarkerById(markerId) {
         const selectedMarker = this.state.flatMarkers.find(m => m.id === markerId) || null;
-        this.setState({ selectedMarker });
+        this.setState({
+            selectedMarker,
+            mappedDirectItems: this.mapHabitatItems(selectedMarker.directInfluenceMarkers),
+            mappedIndirectItems: this.mapHabitatItems(selectedMarker.indirectInfluenceMarkers),
+            markerModalData: {
+                directInfluence: selectedMarker.directInfluenceItems,
+                indirectInfluence: selectedMarker.indirectInfluenceItems
+            },
+        });
     }
 
     handleGeographyClick(geography) {
@@ -138,7 +149,7 @@ class PolyMap extends React.Component {
         this.setState({
             position: {
                 coordinates: [x, y],
-                zoom: 8
+                zoom: 6
             },
             bypass: bypassAnimation
         });
@@ -154,7 +165,7 @@ class PolyMap extends React.Component {
     getGeographyStyle(geo) {
         const isDefaultHighlighted = this.state.regions.findIndex(r => r.highlighted && r.geos.includes(geo.rsmKey)) > -1;
         const isRegionSelected = this.state.selectedRegion && this.state.selectedRegion.geos.includes(geo.rsmKey);
-        const isGeoSelected = isDefaultHighlighted && isRegionSelected || geo.rsmKey === this.state.hoveredMarkerGeoKey;
+        const isGeoSelected = (isDefaultHighlighted && isRegionSelected) || geo.rsmKey === this.state.hoveredMarkerGeoKey;
 
         return {
             default: isGeoSelected ? selectedGeoConfig : isDefaultHighlighted ? highlightedGeoConfig : defaultGeoConfig,
@@ -181,6 +192,12 @@ class PolyMap extends React.Component {
         //this.setState({ hoveredMarkerGeoKey: tgtGeo && tgtGeo.className.baseVal.split(' ')[1] })
     }
 
+    mapHabitatItems = (habitatItems) => {
+        if (!habitatItems || Array.isArray(habitatItems) === false)
+            return {};
+        return habitatItems.reduce((a, key) => Object.assign(a, { [key]: true }), {});
+    }
+
     getMarkers() {
         return this.state.flatMarkers
             .map(marker => {
@@ -201,6 +218,9 @@ class PolyMap extends React.Component {
                         isOpened={marker.id === this.state.openedMarker?.id}
                         onClick={this.handleMarkerClick}
                         onMarkerMouseEnter={this.handleMarkerMouseEnter}
+                        directItems={this.state.mappedDirectItems}
+                        indirectItems={this.state.mappedIndirectItems}
+                        modalData={this.state.markerModalData}
                     />
                 )
             });
@@ -231,6 +251,8 @@ class PolyMap extends React.Component {
                 if (legendItem)
                     visible += legendItem.isSelected;
             });
+        } else { 
+            return marker.visible && (this.state.selectedMarker === null || this.state.selectedMarker.id === marker.id);
         }
 
         const solar = this.state.legend.find(l => l.toggles === MarkerTypes.solar);
@@ -246,14 +268,11 @@ class PolyMap extends React.Component {
     }
 
     handleSpringStart = () => {
-        this.setState({ openedMarker: null });
-    }
-
-    handleSpringRest = () => {
         const selectedMarker = {...this.state.selectedMarker};
         this.setState({ openedMarker: selectedMarker });
     }
-    
+
+    handleSpringRest = () => {}
 
     render() {
         return (
@@ -296,9 +315,9 @@ class PolyMap extends React.Component {
                         )}
                     </Spring>
                 </ComposableMap>
-                {this.state.selectedRegion && (
-                    <Info
-                        title={this.state.selectedRegion.name}
+                {this.state.selectedMarker && (
+                    <FactoryInfo
+                        title={this.state.selectedMarker.title}
                         data={this.state.selectedRegion.info}
                     />
                 )}

@@ -1,4 +1,4 @@
-import { MarkerTypes } from './markers'
+import { MarkerTypes } from './utils'
 import { IconType } from "./components/helpers/icon/Icon";
 
 const legend = [

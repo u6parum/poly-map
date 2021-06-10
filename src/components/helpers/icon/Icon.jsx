@@ -17,7 +17,7 @@ import project from '../../../assets/icons/project.svg';
 import running from '../../../assets/icons/running.svg';
 import solar from '../../../assets/icons/solar.svg';
 import caret from '../../../assets/icons/caret.svg';
-import factory from '../../../assets/icons/factory.png';
+import factory from '../../../assets/icons/processing.svg';
 
 export const IconType = {
     'rainy': 'rainy',

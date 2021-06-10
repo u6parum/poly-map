@@ -1,7 +1,7 @@
 import React from 'react';
 import { Row, Col } from 'antd';
 import Icon from "../helpers/icon/Icon";
-import { MarkerTypes } from "../../markers";
+import { MarkerTypes } from "../../utils";
 import styles from "./Content.module.scss";
 
 import { getMapContainerScrollTopPosition } from "../hoc/mapContainer/MapContainer";

@@ -4,7 +4,7 @@ import { DownOutlined } from "@ant-design/icons";
 import styles from "./LegendFull.module.scss";
 import Icon from '../helpers/icon/Icon';
 import Masonry from '../hoc/masonry/Masonry';
-import { MarkerTypes } from '../../markers';
+import { MarkerTypes } from '../../utils';
 import Content from '../Content/Content';
 import Title from '../Title/Title';
 import { flatMarkersList } from "../../markers";

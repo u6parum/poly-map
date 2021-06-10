@@ -2,7 +2,7 @@ import React from 'react';
 import { Popover } from 'antd';
 import { Marker } from 'react-simple-maps';
 import Icon from "../helpers/icon/Icon";
-import { MarkerColors, MarkerTypes } from "../../markers";
+import { MarkerColors, MarkerTypes } from "../../utils";
 import Content from '../Content/Content';
 import Title from '../Title/Title';
 import FactoryDetailsComponent from '../factoryDetails/FactoryDetails';
@@ -17,9 +17,13 @@ const MapMarker = ({
     regionId,
     onClick,
     isOpened,
+    onMarkerMouseEnter,
     radius = 10,
     items = [],
-    visible = false
+    visible = false,
+    directItems = {},
+    indirectItems = {},
+    modalData,
 }) => {
 
     const [isHovered, setHoveredState] = React.useState(false);
@@ -37,19 +41,26 @@ const MapMarker = ({
                 radius < 4 ?
                     <circle r={radius} fill={MarkerColors[type]} /> :
                     <>
-                        <text textAnchor="end" textDecoration={(isHovered || isOpened) && "underline"} x="-10" y="4" fill="#000">
-                            {title}
-                        </text>
-                        <Icon svgImage size={[radius * 2, radius * 2]} name={type} />
+                        {isOpened ? (
+                            <FactoryDetailsComponent
+                                centeredText={title}
+                                directItems={directItems}
+                                indirectItems={indirectItems}
+                                modalData={modalData}
+                            />
+                        ) : (
+                            <text textAnchor="end" textDecoration={isHovered ? "underline" : "none"} x="-10" y="4" fill="#000">
+                                {title}
+                            </text>
+                        )}
+                        {
+                            (!isOpened) && (<Icon svgImage size={[radius * 2, radius * 2]} name={type} />)
+                        }
                         { solar ? <Icon svgImage name="solar" size={[radius * 1.5, radius * 1.5]} x={-radius * 1.5} y={-radius * 1.5} /> : null}
                     </>
             }
         </Marker>
     );
-
-    if (isOpened) {
-        return <FactoryDetailsComponent />
-    }
 
     if (!items.length) {
         return marker;
