@@ -2,7 +2,9 @@
 @import "~bootstrap-4-grid/scss/grid.scss";
 @import "./GlobalVariables.scss";
 
-
+/* 
+  Глобальные стили для переопределения установок сайта по-умолчанию
+*/
 
 html {
   --antd-wave-shadow-color: $primary-color !important;
@@ -13,6 +15,29 @@ body {
   margin: 0;
   padding: 0;
 }
+
+:global {
+  .App {
+    & > .container {
+      display: none !important;
+    }
+  } 
+
+  .page__breadcrumbs {
+    position: absolute !important;
+    z-index: 1 !important;
+    width: 100% !important;
+    margin-top: 48px !important;
+  }
+
+  .page__footer {
+    .footer-nav {
+      margin-top: 0 !important;
+    }
+  }
+}
+
+/** */
 
 .App {
   font-family: 'Inter', sans-serif;
